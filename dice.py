@@ -11,7 +11,7 @@ def dice_roll():
         roll.append(True)
     else: 
         roll.append(False)
-
+    print(roll)
     return roll
 
 dice_roll()

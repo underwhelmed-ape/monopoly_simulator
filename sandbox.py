@@ -1,2 +1,10 @@
-for i in range(1,51):
-    print(f'i: {i}, remainder: {i % 40}')
+from random import shuffle
+
+
+lst = ['Drunk', 0, 39, 24, 13, 'bank pays', 'get ooj']
+shuffle(lst)
+
+print(lst.pop())
+
+print(lst)
+
