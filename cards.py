@@ -4,11 +4,11 @@ from random import shuffle
 # maybe improve by turning each into a class
 
 
-def select_chance_card():
-    chance_cards = ['Drunk', 0, 39, 24, 13,
-    'bank_pays', 'gooj', 'back_3', 10, 'house_repairs', 
-    'fees', 'fine', 5, 'street_repairs', 'crossword', 'loan']
-    
+chance_cards = ['Drunk', 0, 39, 24, 13,
+'bank_pays', 'gooj', 'back_3', 10, 'house_repairs', 
+'fees', 'fine', 5, 'street_repairs', 'crossword', 'loan']
+
+def select_chance_card(chance_cards):
     shuffle(chance_cards)
     chance_card = chance_cards.pop()
     print(chance_card)
@@ -26,4 +26,4 @@ def select_community_chest_card():
 
     return community_card
 
-select_chance_card()
+

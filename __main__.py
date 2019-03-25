@@ -44,8 +44,10 @@ while goes < finish:
             player_position = community_card
 
     print(f'Total number of goes: {goes}')
+
     print(player_position)
     position_landings.append(player_position)
     goes += 1
     
-print(collections.Counter(position_landings))
+res = collections.Counter(position_landings)
+print(res)
