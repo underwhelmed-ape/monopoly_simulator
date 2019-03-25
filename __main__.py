@@ -13,8 +13,17 @@ goes = 0
 finish = 10000 # maximum number of throws in simulation
 
 player_position = 0 # start at Go (denoted by 0)
+
+chance_cards = ['Drunk', 0, 39, 24, 13,
+'bank_pays', 'gooj', 'back_3', 10, 'house_repairs', 
+'fees', 'fine', 5, 'street_repairs', 'crossword', 'loan']
 chance_card_positions = [7, 22, 36]
+
+community_cards = [0, 19, 10, 'hospital', 'doctors', 'insurance', 'ban_error',
+'annuity', 'inherit', 'stock', 'interest', 
+'refund', 'prize', 'birthday', 'gooj', 'pay'] 
 community_chest_locations = [2, 33]
+
 doubles = 0 # keeps count of the number of doubles thrown up to 3 max
 
 position_landings = []
@@ -32,14 +41,22 @@ while goes < finish:
         player_position = (player_position + roll[0])
     
     if player_position in chance_card_positions:
-        print(f'take chance')
-        chance_card = select_chance_card()
+        print('TAKE A CHANCE CARD')
+        if len(chance_cards) == 0:
+            chance_cards = ['Drunk', 0, 39, 24, 13,
+                            'bank_pays', 'gooj', 'back_3', 10, 'house_repairs', 
+                            'fees', 'fine', 5, 'street_repairs', 'crossword', 'loan']
+        chance_card = select_chance_card(chance_cards)
         if isinstance(chance_card, int):
             player_position = chance_card
 
     elif player_position in community_chest_locations:
-        print(f'take community chest')
-        community_card = select_community_chest_card()
+        print('TAKE A COMMUNITY CHEST CARD')
+        if len(community_cards) == 0:
+            community_cards = [0, 19, 10, 'hospital', 'doctors', 'insurance', 'ban_error',
+                                'annuity', 'inherit', 'stock', 'interest', 
+                                'refund', 'prize', 'birthday', 'gooj', 'pay']
+        community_card = select_community_chest_card(community_cards)
         if isinstance(community_card, int):
             player_position = community_card
 

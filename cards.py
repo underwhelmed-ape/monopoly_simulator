@@ -4,26 +4,19 @@ from random import shuffle
 # maybe improve by turning each into a class
 
 
-chance_cards = ['Drunk', 0, 39, 24, 13,
-'bank_pays', 'gooj', 'back_3', 10, 'house_repairs', 
-'fees', 'fine', 5, 'street_repairs', 'crossword', 'loan']
-
 def select_chance_card(chance_cards):
     shuffle(chance_cards)
     chance_card = chance_cards.pop()
     print(chance_card)
+    print(f'number of chance cards left: {len(chance_cards)}')
     
     return chance_card
 
 
-def select_community_chest_card():
-    community_cards = [0, 19, 10, 'hospital', 'doctors', 'insurance', 'ban_error', 
-    'annuity', 'inherit', 'stock', 'interest', 'refund', 'prize', 'birthday', 'gooj', 'pay'] 
-
+def select_community_chest_card(community_cards):
     shuffle(community_cards)
     community_card = community_cards.pop()
     print(community_card)
+    print(f'number of community chest cards left: {len(community_cards)}')
 
     return community_card
-
-
