@@ -2,7 +2,6 @@ import collections
 
 import pandas as pd
 
-
 from dice import dice_roll
 from cards import select_chance_card, select_community_chest_card
 
@@ -35,6 +34,8 @@ while goes < finish:
     print(roll[0])
     if (player_position + roll[0]) == 40:
         player_position = 0
+    elif (player_position + roll[0]) == 30:
+        player_position = 10
     elif (player_position + roll[0]) > 40:
          player_position = 0 + ((player_position + roll[0]) % 40)
     else:
