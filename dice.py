@@ -12,6 +12,5 @@ def dice_roll():
     else: 
         roll.append(False)
     print(roll)
-    return roll
 
-dice_roll()
+    return roll

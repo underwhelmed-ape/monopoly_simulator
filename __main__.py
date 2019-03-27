@@ -4,6 +4,7 @@ import pandas as pd
 
 from dice import dice_roll
 from cards import select_chance_card, select_community_chest_card
+from player_movement import movement_pattern
 
 print('Begin game')
 
@@ -24,6 +25,7 @@ community_cards = [0, 19, 10, 'hospital', 'doctors', 'insurance', 'ban_error',
 community_chest_locations = [2, 33]
 
 doubles = 0 # keeps count of the number of doubles thrown up to 3 max
+gooj_cards = 0
 
 position_landings = []
 
@@ -32,24 +34,37 @@ while goes < finish:
     
     roll = dice_roll()
     print(roll[0])
-    if (player_position + roll[0]) == 40:
-        player_position = 0
-    elif (player_position + roll[0]) == 30:
-        player_position = 10
-    elif (player_position + roll[0]) > 40:
-         player_position = 0 + ((player_position + roll[0]) % 40)
+
+    if roll[1] == True:
+        doubles += 1
     else:
-        player_position = (player_position + roll[0])
-    
+        doubles = 0
+
+    if doubles == 3:
+        player_position == 10
+    else:
+        player_position = movement_pattern(roll, player_position)
+
     if player_position in chance_card_positions:
         print('TAKE A CHANCE CARD')
         if len(chance_cards) == 0:
             chance_cards = ['Drunk', 0, 39, 24, 13,
-                            'bank_pays', 'gooj', 'back_3', 10, 'house_repairs', 
+                            'bank_pays', 'gooj', 'back_3', 'jail', 'house_repairs', 
                             'fees', 'fine', 5, 'street_repairs', 'crossword', 'loan']
         chance_card = select_chance_card(chance_cards)
         if isinstance(chance_card, int):
             player_position = chance_card
+        elif chance_card == 'back_3':
+            player_position = player_position - 3
+        elif chance_card == 'gooj':
+            gooj_cards += 1
+            print(f'Get out of jail free cards: {gooj_cards}')
+        elif chance_card == 'jail':
+            print(f'Get out of jail free cards: {gooj_cards}')
+            if gooj_cards == 0:
+                player_position = 10
+            else:
+                gooj_cards -= 1
 
     elif player_position in community_chest_locations:
         print('TAKE A COMMUNITY CHEST CARD')
