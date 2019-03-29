@@ -33,12 +33,13 @@ while goes < finish:
     print('Begin Roll')
     
     roll = dice_roll()
-    print(roll[0])
 
     if roll[1] == True:
         doubles += 1
     else:
         doubles = 0
+    print(f'Number of doubles: {doubles}')
+
 
     if doubles == 3:
         player_position == 10

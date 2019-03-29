@@ -1,10 +1,18 @@
-from random import shuffle
+from dice import dice_roll
+
+doubles = 0
 
 
-lst = ['Drunk', 0, 39, 24, 13, 'bank pays', 'get ooj']
-shuffle(lst)
+for i in range(150):
+    roll = dice_roll()
 
-print(lst.pop())
+    if roll[1] == True:
+        doubles += 1
+    else:
+        doubles = 0
+    print(f'Number of doubles: {doubles}')
 
-print(lst)
-
+    if doubles == 3:
+        doubles = 0
+        print(f'go to jail. Number of doubles is now {doubles}')
+        
