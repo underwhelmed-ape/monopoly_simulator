@@ -42,6 +42,8 @@ while goes < finish:
 
     if doubles == 3:
         player_position == 10
+        if gooj_cards > 0:
+            gooj_cards -= 1
     else:
         player_position = movement_pattern(roll, player_position)
 
