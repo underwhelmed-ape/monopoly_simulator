@@ -1,5 +1,4 @@
 import collections
-
 import pandas as pd
 
 from dice import dice_roll
@@ -42,6 +41,8 @@ while goes < finish:
 
     if doubles == 3:
         player_position == 10
+        if gooj_cards > 0:
+            gooj_cards -= 1
     else:
         player_position = move_player(roll, player_position)
 
@@ -75,6 +76,9 @@ while goes < finish:
         community_card = select_community_chest_card(community_cards)
         if isinstance(community_card, int):
             player_position = community_card
+        elif community_card == 'gooj':
+            gooj_cards += 1
+        
 
     print(f'Total number of goes: {goes}')
 
