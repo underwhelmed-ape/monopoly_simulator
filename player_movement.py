@@ -1,6 +1,6 @@
 from dice import dice_roll
 
-def movement_pattern(roll, player_position):
+def move_player(roll, player_position):
     if (player_position + roll[0]) == 40:
         player_position = 0
     elif (player_position + roll[0]) == 30:

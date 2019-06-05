@@ -4,7 +4,7 @@ import pandas as pd
 
 from dice import dice_roll
 from cards import select_chance_card, select_community_chest_card
-from player_movement import movement_pattern
+from player_movement import move_player
 
 print('Begin game')
 
@@ -31,7 +31,7 @@ position_landings = []
 
 while goes < finish:
     print('Begin Roll')
-    
+       
     roll = dice_roll()
 
     if roll[1] == True:
@@ -40,11 +40,10 @@ while goes < finish:
         doubles = 0
     print(f'Number of doubles: {doubles}')
 
-
     if doubles == 3:
         player_position == 10
     else:
-        player_position = movement_pattern(roll, player_position)
+        player_position = move_player(roll, player_position)
 
     if player_position in chance_card_positions:
         print('TAKE A CHANCE CARD')
