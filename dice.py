@@ -11,6 +11,31 @@ def dice_roll():
         roll.append(True)
     else: 
         roll.append(False)
-    print(roll)
+    #print(roll)
 
     return roll
+
+if __name__ == "__main__":
+
+    from random import randint    
+    import plotly.plotly as py
+    import plotly.graph_objs as go
+    import numpy as np
+
+    rolls = {}
+    for i in range(10):
+        roll = dice_roll()[0]
+        if roll in rolls:
+            rolls[roll] += 1
+        else:
+            rolls[roll] = 1
+    
+    print(rolls)
+    print(rolls.items())
+
+    #names = ['id','data']
+    #formats = ['f8','f8']
+    #dtype = dict(names = names, formats=formats)
+    #rolls = np.array(list(rolls.items()), dtype=dtype)
+    #data = [go.Histogram(x=rolls)]
+    #py.iplot(data, filename='basic histogram')
