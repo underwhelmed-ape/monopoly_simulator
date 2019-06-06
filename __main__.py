@@ -7,9 +7,11 @@ from player_movement import move_player
 
 print('Begin game')
 
+games = 0 # count the number of games played
+number_of_games = 1000 # number of simulated games to play
 
 goes = 0
-finish = 10000 # maximum number of throws in simulation
+finish = 100 # maximum number of throws in game simulation
 
 player_position = 0 # start at Go (denoted by 0)
 
