@@ -4,3 +4,4 @@ env
 venv_test
 monopoly_env
 .vscode
+.ipynb_checkpoints/
