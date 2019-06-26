@@ -3,3 +3,4 @@ numpy
 pytest-watch
 plotly
 jupyter 
+matplotlib
