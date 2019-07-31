@@ -13,20 +13,22 @@ number_of_games = 1000 # number of simulated games to play
 goes = 0
 finish = 100 # maximum number of throws in game simulation
 
-player_position = 0 # start at Go (denoted by 0)
-
 chance_cards = ['Drunk', 0, 39, 24, 13,
-'bank_pays', 'gooj', 'back_3', 10, 'house_repairs', 
-'fees', 'fine', 5, 'street_repairs', 'crossword', 'loan']
+                'bank_pays', 'gooj', 'back_3', 10, 'house_repairs', 
+                'fees', 'fine', 5, 'street_repairs', 'crossword', 'loan']
+
 chance_card_positions = [7, 22, 36]
 
 community_cards = [0, 19, 10, 'hospital', 'doctors', 'insurance', 'ban_error',
-'annuity', 'inherit', 'stock', 'interest', 
-'refund', 'prize', 'birthday', 'gooj', 'pay'] 
+                'annuity', 'inherit', 'stock', 'interest', 
+                'refund', 'prize', 'birthday', 'gooj', 'pay'] 
+
 community_chest_locations = [2, 33]
 
 doubles = 0 # keeps count of the number of doubles thrown up to 3 max
 gooj_cards = 0
+
+player_position = 0 # start at Go (denoted by 0)
 
 position_landings = []
 
