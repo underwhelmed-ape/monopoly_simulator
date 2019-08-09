@@ -11,8 +11,7 @@ def dice_roll():
         roll.append(True)
     else: 
         roll.append(False)
-    #print(roll) 
-
+ 
     return roll
 
 if __name__ == "__main__":
