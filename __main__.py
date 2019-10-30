@@ -6,7 +6,7 @@ from cards import select_chance_card, select_community_chest_card
 from player_movement import move_player
 
 games = 0 # count the number of games played
-number_of_games = 1000000 # number of simulated games to play
+number_of_games = 10000 # number of simulated games to play
 
 print(f'Begin {number_of_games} games')
 
@@ -17,7 +17,7 @@ for game in range(number_of_games):
     #print(f'Game number: {game}') # start at 1
 
     goes = 0
-    finish = 100 # maximum number of throws in game simulation
+    finish = 1000 # maximum number of throws in game simulation
 
     chance_cards = ['Drunk', 0, 39, 24, 13,
                     'bank_pays', 'gooj', 'back_3', 10, 'house_repairs', 
