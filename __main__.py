@@ -6,53 +6,66 @@ from cards import select_chance_card, select_community_chest_card
 from player_movement import move_player
 
 games = 0 # count the number of games played
-number_of_games = 10000 # number of simulated games to play
+number_of_games = 1 # number of simulated games to play
+game_results = {}
 
 print(f'Begin {number_of_games} games')
 
-game_results = {}
-
 for game in range(number_of_games):
 
-    #print(f'Game number: {game}') # start at 1
+    throws_counter = 0
+    number_of_throws = 10000 # maximum number of throws in game simulation
 
-    goes = 0
-    finish = 1000 # maximum number of throws in game simulation
-
+    # list of chance cards and actions
     chance_cards = ['Drunk', 0, 39, 24, 13,
                     'bank_pays', 'gooj', 'back_3', 10, 'house_repairs', 
                     'fees', 'fine', 5, 'street_repairs', 'crossword', 'loan']
 
     chance_card_positions = [7, 22, 36]
 
+    # list of community chest cards and actions
     community_cards = [0, 19, 10, 'hospital', 'doctors', 'insurance', 'ban_error',
                     'annuity', 'inherit', 'stock', 'interest', 
                     'refund', 'prize', 'birthday', 'gooj', 'pay'] 
 
     community_chest_locations = [2, 33]
 
-    doubles = 0 # keeps count of the number of doubles thrown up to 3 max
+    # track number of consecutive doubles thrown and 'get out of jail free' cards acquired
+    doubles = [False, False, False]
     gooj_cards = 0
 
     player_position = 0 # start at Go (denoted by 0)
+    in_jail = False # tracks if player is in jail or visiting jail, defaults visiting
 
+    # track every space landed on during a game
     position_landings = []
 
-    while goes < finish:
-        #print('Begin Roll')
-        
+    while throws_counter < number_of_throws:
+       
         roll = dice_roll()
 
-        if roll[1] == True:
-            doubles += 1
-        else:
-            doubles = 0
+        # if roll is a third consecutive double, move to jail
+        if roll[1]:
+            if doubles == [False, False, False]:
+                doubles[0] = True
+            elif doubles == [True, False, False]:
+                doubles[1] = True
+            elif doubles == [True, True, False]:
+                doubles[2] = True
+                player_position = 10
+                in_jail = True
+                doubles = [False, False, False]
+                continue
+        else: 
+            doubles = [False, False, False]
+        # if find on jail square have a seperate set of rules
         #print(f'Number of doubles: {doubles}')
 
-        if doubles == 3:
-            player_position == 10
-            if gooj_cards > 0:
-                gooj_cards -= 1
+        if in_jail:
+            # add gooj clause here
+            if roll[1]:
+                player_position = move_player(roll, player_position)
+                in_jail = False
         else:
             player_position = move_player(roll, player_position)
 
@@ -90,11 +103,11 @@ for game in range(number_of_games):
                 gooj_cards += 1
             
 
-        #print(f'Total number of goes: {goes}')
+        #print(f'Total number of goes: {throws_counter}')
 
         #print(player_position)
         position_landings.append(player_position)
-        goes += 1
+        throws_counter += 1
         
     res = collections.Counter(position_landings)
     #print(res)

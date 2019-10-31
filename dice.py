@@ -14,6 +14,21 @@ def dice_roll():
  
     return roll
 
+# inputs roll if double and outputs 
+def doubles_checker(dice_roll, doubles_tracker):
+    if dice_roll[1]:
+        if doubles_tracker == [False, False, False]:
+            doubles_tracker[0] = True
+        elif doubles_tracker == [True, False, False]:
+            doubles_tracker[1] = True
+        elif doubles_tracker == [True, True, False]:
+            doubles_tracker[2] = True
+            print('go to jail')
+            doubles_tracker = [False, False, False]
+    else: 
+        doubles_tracker = [False, False, False]
+
+
 if __name__ == "__main__":
 
     from random import randint    
@@ -23,16 +38,33 @@ if __name__ == "__main__":
     import matplotlib
     import matplotlib.pyplot as plt
 
-    rolls = {}
-    for i in range(10000):
-        roll = dice_roll()[0]
-        if roll in rolls:
-            rolls[roll] += 1
-        else:
-            rolls[roll] = 1
-    
-    print(rolls)
-    print(rolls.items())
+    doubles = [False, False, False]
 
-    plt.bar(list(rolls.keys()), rolls.values(), color='g')
-    plt.show()
+    for i in range(1000):
+        roll = dice_roll()
+        if roll[1]:
+            if doubles == [False, False, False]:
+                doubles[0] = True
+            elif doubles == [True, False, False]:
+                doubles[1] = True
+            elif doubles == [True, True, False]:
+                doubles[2] = True
+                print('go to jail')
+                doubles = [False, False, False]
+        else: 
+            doubles = [False, False, False]
+        # if find on jail square have a seperate set of rules
+
+    # rolls = {}
+    # for i in range(10000):
+    #     roll = dice_roll()[0]
+    #     if roll in rolls:
+    #         rolls[roll] += 1
+    #     else:
+    #         rolls[roll] = 1
+    
+    # print(rolls)
+    # print(rolls.items())
+
+    # plt.bar(list(rolls.keys()), rolls.values(), color='g')
+    # plt.show()
