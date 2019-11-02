@@ -6,7 +6,7 @@ from cards import select_chance_card, select_community_chest_card
 from player_movement import move_player
 
 games = 0 # count the number of games played
-number_of_games = 1 # number of simulated games to play
+number_of_games = 100000 # number of simulated games to play
 game_results = {}
 
 print(f'Begin {number_of_games} games')
@@ -14,7 +14,7 @@ print(f'Begin {number_of_games} games')
 for game in range(number_of_games):
 
     throws_counter = 0
-    number_of_throws = 10000 # maximum number of throws in game simulation
+    number_of_throws = 100 # maximum number of throws in game simulation
 
     # list of chance cards and actions
     chance_cards = ['Drunk', 0, 39, 24, 13,
@@ -40,7 +40,7 @@ for game in range(number_of_games):
     # track every space landed on during a game
     position_landings = []
 
-    while throws_counter < number_of_throws:
+    while throws_counter <= number_of_throws:
        
         roll = dice_roll()
 
@@ -58,14 +58,18 @@ for game in range(number_of_games):
                 continue
         else: 
             doubles = [False, False, False]
+        
         # if find on jail square have a seperate set of rules
-        #print(f'Number of doubles: {doubles}')
-
         if in_jail:
-            # add gooj clause here
             if roll[1]:
                 player_position = move_player(roll, player_position)
                 in_jail = False
+            # currently if roll double and get out of jail, the counter still removes a card
+            # also only want to roll three times before getting out of jail automatically
+            if gooj_cards > 0:
+                gooj_cards -= 1
+                in_jail = False
+
         else:
             player_position = move_player(roll, player_position)
 
@@ -82,18 +86,15 @@ for game in range(number_of_games):
                 player_position = player_position - 3
             elif chance_card == 'gooj':
                 gooj_cards += 1
-                #print(f'Get out of jail free cards: {gooj_cards}')
             elif chance_card == 'jail':
-                #print(f'Get out of jail free cards: {gooj_cards}')
-                if gooj_cards == 0:
-                    player_position = 10
-                else:
-                    gooj_cards -= 1
+                player_position = 10
+                in_jail = True
+
 
         elif player_position in community_chest_locations:
             #print('TAKE A COMMUNITY CHEST CARD')
             if len(community_cards) == 0:
-                community_cards = [0, 19, 10, 'hospital', 'doctors', 'insurance', 'ban_error',
+                community_cards = [0, 1, 'jail', 'hospital', 'doctors', 'insurance', 'ban_error',
                                     'annuity', 'inherit', 'stock', 'interest', 
                                     'refund', 'prize', 'birthday', 'gooj', 'pay']
             community_card = select_community_chest_card(community_cards)
@@ -101,7 +102,9 @@ for game in range(number_of_games):
                 player_position = community_card
             elif community_card == 'gooj':
                 gooj_cards += 1
-            
+            elif community_card == 'jail':
+                player_position = 10
+                in_jail = True
 
         #print(f'Total number of goes: {throws_counter}')
 
