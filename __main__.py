@@ -6,7 +6,7 @@ from cards import select_chance_card, select_community_chest_card
 from player_movement import move_player
 
 games = 0 # count the number of games played
-number_of_games = 100000 # number of simulated games to play
+number_of_games = 10000 # number of simulated games to play
 game_results = {}
 
 print(f'Begin {number_of_games} games')
@@ -32,6 +32,7 @@ for game in range(number_of_games):
 
     # track number of consecutive doubles thrown and 'get out of jail free' cards acquired
     doubles = [False, False, False]
+    non_doubles_in_jail = 0 
     gooj_cards = 0
 
     player_position = 0 # start at Go (denoted by 0)
@@ -61,14 +62,29 @@ for game in range(number_of_games):
         
         # if find on jail square have a seperate set of rules
         if in_jail:
-            if roll[1]:
-                player_position = move_player(roll, player_position)
-                in_jail = False
-            # currently if roll double and get out of jail, the counter still removes a card
-            # also only want to roll three times before getting out of jail automatically
             if gooj_cards > 0:
                 gooj_cards -= 1
                 in_jail = False
+                throws_counter += 1
+                continue
+            
+            if roll[1]:
+                #player_position = move_player(roll, player_position)
+                non_doubles_in_jail = 0
+                in_jail = False
+                throws_counter += 1
+                continue
+            else:
+                non_doubles_in_jail += 1
+                throws_counter += 1
+                if non_doubles_in_jail >= 3:
+                    in_jail = False
+                    continue
+                else:
+                    continue
+            # currently if roll double and get out of jail, the counter still removes a card
+            # also only want to roll three times before getting out of jail automatically
+
 
         else:
             player_position = move_player(roll, player_position)
