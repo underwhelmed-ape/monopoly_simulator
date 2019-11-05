@@ -20,3 +20,9 @@ In the end I limited the scope of the project to calculate probabilities: Withou
 Each square on the board was assigned a number, starting with 'Go' which was assigned 0. The player starts here at the beginning of each game.
 
 
+
+Notes:
+The probabilites are dependant on the game version and the subsequent rules that are applied. This version follows the UK edition, which has 16 Community Chest cards compard to the 17 of the Original.
+
+The space counted for the probabilities is the one the player finishes their go on. For example, if a Player lands on positon 7 (Chance) and is then instructed to move to postion 0 (Go), then it is the final position (0) that is counted and not the Chance space.
+This will affect the final probabilities. 
