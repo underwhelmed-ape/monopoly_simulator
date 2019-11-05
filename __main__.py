@@ -56,6 +56,8 @@ for game in range(number_of_games):
                 player_position = 10
                 in_jail = True
                 doubles = [False, False, False]
+                position_landings.append(player_position)
+                throws_counter += 1
                 continue
         else: 
             doubles = [False, False, False]
