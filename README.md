@@ -2,7 +2,7 @@
 
 ## Purpose
 
-This is to document the process and results of the distribution of where a player lands on a Monopoy board.
+This is to document the process and results of the distribution of where a player lands on a Monopoly board.
 
 ## Approach
 
